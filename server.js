@@ -1,13 +1,19 @@
 // @Dependencies
 const express = require('express')
 const bodyParser = require('body-parser')
-const {sendFile} = require('./helpers')
+const morgan = require('morgan')
+const {sendFile, isValid} = require('./helpers')
 
 // @Boilerplate
 const app = express()
 const PORT = 8000
 
+// @Database (Mock)
+const tables = []
+const waitlist = []
+
 // @Middleware
+app.use(morgan('combined'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json());
@@ -38,6 +44,21 @@ app.get('/api/:endpoint?', function (req, res) {
       res.status(404).send('Not found')
       break
   }
+})
+
+app.post('/tables', function (req, res) {
+  const table = req.body
+
+  let response
+  if (!isValid(table)) {
+    res.status(400)
+    response = {error: 'Malformed input. Check your submission and try again.'}
+  } else {
+    res.status(201)
+    tables.push(table)
+  }
+
+  res.json(response)
 })
 
 // @Start

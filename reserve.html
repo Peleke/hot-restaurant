@@ -45,10 +45,25 @@
     crossorigin="anonymous">
   </script>
   <script>
+    const contentsOf = function contentsOf (id) {
+      return $(id).val().trim()
+    }
+    
     $('#submit-reservation').on('click', function (event) {
       event.preventDefault()
 
       console.log('Submit clicked.')
+
+      const reservation = {
+        name: contentsOf('#name-input'),
+        email: contentsOf('#email-input'),
+        phoneNumber: contentsOf('#phone-input'),
+        id: contentsOf('#id-input')
+      }
+
+      $.post('/tables', reservation)
+       .done(console.log)
+       .fail(console.error)
     })
   </script>
 </body>
