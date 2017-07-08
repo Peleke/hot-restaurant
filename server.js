@@ -2,6 +2,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const path = require('path')
 const {sendFile, isValid} = require('./helpers')
 
 // @Boilerplate
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // @Routes
+
 app.get('/', function (req, res) {
   sendFile(res, 'index.html')
 })
@@ -49,11 +51,6 @@ app.get('/api/:endpoint?', function (req, res) {
 app.post('/tables', function (req, res) {
   const table = req.body
 
-  // The code below uses this helper function:...
-  // function isValid (table) {
-  //   return table == undefined
-  // }
-
   let response
   if (!isValid(table)) {
     res.status(400)
@@ -64,6 +61,10 @@ app.post('/tables', function (req, res) {
   }
 
   res.json(response)
+})
+
+app.get('*', function (req, res) {
+  res.status(404).sendFile(path.join(__dirname, '404.html'))
 })
 
 // @Start
