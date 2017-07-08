@@ -1,0 +1,16 @@
+{
+  "name": "hot-restaurant",
+  "version": "1.0.0",
+  "description": "An Express-backed application for taking restaurant reservations.",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Peleke Sengstacke",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "ramda": "^0.24.1"
+  }
+}
