@@ -1,6 +1,7 @@
 // @Dependencies
 const express = require('express')
 const bodyParser = require('body-parser')
+const {sendFile} = require('./helpers')
 
 // @Boilerplate
 const app = express()
@@ -14,15 +15,15 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // @Routes
 app.get('/', function (req, res) {
-  res.send('Welcome home.')
+  sendFile(res, 'index.html')
 })
 
 app.get('/reserve', function (req, res) {
-  res.send('Make a reservation.')
+  sendFile(res, 'reserve.html')
 })
 
 app.get('/tables', function (req, res) {
-  res.send('View the tables.')
+  sendFile(res, 'tables.html')
 })
 
 app.get('/api/:endpoint?', function (req, res) {
