@@ -10,8 +10,56 @@
 <body>
   <div class="container">
     <div class="jumbotron">
-      <h1>This is the tables page.</h1>
+        <h1>Hot Restaurant</h1>
     </div>
-  </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Reservations</h3>
+      </div>
+      <div class="panel-body">
+        <ul id="reservations">
+          
+        </ul>
+      </div>
+    </div>
+
+    <hr> 
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Waitlist</h3>
+      </div>
+      <div class="panel-body">
+        <ul id="waitlist">
+
+        </ul>
+      </div>
+    </div>
+  
+  </div> <!--div.container-->
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous">
+  </script>
+  <script>
+    $.get('/api/tables')
+     .done(function (data) {
+       const pivot = 5
+       const waitlist = data.slice(pivot)
+       const waitlistNode = $('#waitlist')
+       const reservationsNode = $('#reservations')
+
+       data.forEach(function (reservation, index) {
+         if (index < pivot) {
+           reservationsNode.append($('<li>').text(reservation.name))
+         } else {
+           waitlistNode.append($('<li>').text(reservation.name))
+         }
+       })
+     })
+     .fail(console.error)
+  </script>
 </body>
 </html>

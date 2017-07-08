@@ -35,13 +35,13 @@ app.get('/tables', function (req, res) {
 app.get('/api/:endpoint?', function (req, res) {
   switch (req.params.endpoint) {
     case 'tables':
-      res.send('Tables data')
+      res.json(tables)
       break
     case 'waitlist':
-      res.send('Waitlist data')
+      res.json(tables.slice(5))
       break
     default:
-      res.status(404).send('Not found')
+      res.status(404).json({error: 'Not Found'})
       break
   }
 })
