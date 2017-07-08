@@ -15,15 +15,15 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // @Routes
 app.get('/', function (req, res) {
-  sendFile(res, 'index.html'))
+  sendFile(res, 'index.html')
 })
 
 app.get('/reserve', function (req, res) {
-  sendFile(res, 'reserve.html'))
+  sendFile(res, 'reserve.html')
 })
 
 app.get('/tables', function (req, res) {
-  sendFile(res, 'tables.html'))
+  sendFile(res, 'tables.html')
 })
 
 app.get('/api/:endpoint?', function (req, res) {
