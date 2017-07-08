@@ -49,6 +49,11 @@ app.get('/api/:endpoint?', function (req, res) {
 app.post('/tables', function (req, res) {
   const table = req.body
 
+  // The code below uses this helper function:...
+  // function isValid (table) {
+  //   return table == undefined
+  // }
+
   let response
   if (!isValid(table)) {
     res.status(400)
