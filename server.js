@@ -35,7 +35,7 @@ app.get('/api/:endpoint?', function (req, res) {
       res.send('Waitlist data')
       break
     default:
-      res.send(404, 'Not found')
+      res.status(404).send('Not found')
       break
   }
 })
